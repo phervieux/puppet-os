@@ -25,39 +25,6 @@ class os::debian-lenny {
     priority => "1001",
   }
 
-  #
-  # Locales
-  #
-
-  package {"locales-all":
-    ensure => absent,
-  }
-
-  package {"locales":
-    ensure => present,
-    require => File["/etc/locale.gen"],
-    notify => Exec["locale-gen"],
-  }
-
-  file {"/etc/locale.gen":
-    ensure  => present,
-    source  => "puppet:///modules/os/locale.gen",
-    notify => Exec["locale-gen"],
-  }
-
-  exec {"locale-gen":
-    refreshonly => true,
-    command => "locale-gen",
-    timeout => 30,
-    require => [File["/usr/share/locale/locale.alias"], Package["locales"], File["/etc/locale.gen"]],
-  }
-
-  # BUG: Smells hacky ?
-  file {"/usr/share/locale/locale.alias":
-    ensure => present,
-    source => "puppet:///modules/os/locale.alias",
-  }
-
   # SSL Configuration
   package {
     "ca-certificates": ensure => present;
