@@ -1,27 +1,18 @@
 class os::ubuntu {
   # fix 7376
-  package { ["openssl", "openssh-server", "openssh-client", "openssh-blacklist", "ssl-cert" ]:
-    ensure => latest,
-    require => Exec["apt-get_update"]
+  package {['openssl', 'openssh-server', 'openssh-client',
+            'openssh-blacklist', 'ssl-cert']:
+    ensure  => latest,
+    require => Exec['apt-get_update'],
   }
 
   # Default packages
-  package {
-    "cron": ensure => present;
-    "nano": ensure => present;
-    "pwgen": ensure => present;
-    "vim": ensure => present;
-    "curl": ensure => present;
-    "mtr-tiny": ensure => present;
-    "cvs": ensure => present;
-    "bzip2": ensure => present;
-    "cadaver": ensure => present;
-    "tofrodos": ensure => present;
-    "lynx": ensure => present;
-    "locales": ensure => present;
+  package {['cron', 'nano', 'pwgen', 'vim', 'curl', 'mtr-tiny', 'cvs',
+            'bzip2', 'cadaver', 'tofrodos', 'lynx', 'locales']:
+    ensure => present;
   }
-  
-  file {"/etc/profile.d":
+
+  file {'/etc/profile.d':
     ensure => directory
   }
 
@@ -29,43 +20,47 @@ class os::ubuntu {
   kmod::blacklist {'pcspkr': }
 
   # Do not propose system upgrade
-  common::line {
-    "default release-upgrade prompt configuration removed":
-      line   => 'prompt=normal',
-      file   => '/etc/update-manager/release-upgrades',
-      ensure => absent;
-    "release-upgrade prompt configuration to none":
-      line   => 'prompt=never',
-      file   => '/etc/update-manager/release-upgrades',
-      require=> File["/etc/update-manager/"],
-      ensure => present;
+  augeas::lens {'apt_update_manager':
+    lens_source => 'puppet:///modules/os/lenses/apt_update_manager.aug',
+    test_source => 'puppet:///modules/os/lenses/test_apt_update_manager.aug',
   }
 
-  file {"/etc/update-manager/":
+  augeas {
+    'default release-upgrade prompt configuration removed':
+      load_path => '/usr/share/augeas/lenses/contrib/',
+      context   => '/files/etc/update-manager/release-upgrades',
+      changes   => [
+        # Remove other versions of the key
+        'rm DEFAULT/*[label() =~ regexp("[Pp][Rr][Oo][Mm][Pp][Tt]")]',
+        'set DEFAULT/Prompt normal',
+      ],
+  }
+
+  file {'/etc/update-manager/':
       ensure => directory,
   }
 
   # Profile
-  file {"/etc/profile":
+  file {'/etc/profile':
     ensure => present,
     owner  => root,
     group  => root,
-    mode   => 644,
-    source => "puppet:///modules/os/etc/profile-ubuntu",
+    mode   => '0644',
+    source => 'puppet:///modules/os/etc/profile-ubuntu',
   }
 
   # Timezone
-  file { "/etc/localtime":
+  file { '/etc/localtime':
     ensure => present,
-    source => "file:///usr/share/zoneinfo/Europe/Zurich",
+    source => 'file:///usr/share/zoneinfo/Europe/Zurich',
   }
-  file { "/etc/timezone":
+  file { '/etc/timezone':
     ensure  => present,
-    content => "Europe/Zurich",
+    content => 'Europe/Zurich',
   }
 
   # Kernel
-  file { "/etc/modules":
+  file { '/etc/modules':
     ensure => present,
   }
 }
