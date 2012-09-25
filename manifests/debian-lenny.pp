@@ -46,6 +46,6 @@ class os::debian-lenny {
     command  => "/usr/bin/apt-get update -q=2",
     ensure   => present,
     hour     => 4,
-    minute   => ip_to_cron(1),
+    minute   => fqdn_rand(60),
   }
 }
