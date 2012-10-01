@@ -29,7 +29,7 @@ class os {
     ubuntu: {
       case $lsbdistcodename {
         lucid: {
-          include "os::ubuntu-${lsbdistcodename}"
+          include "os::ubuntu-lucid"
         }
 
         default: {
