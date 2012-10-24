@@ -25,15 +25,14 @@ class os::ubuntu-lucid {
     test_source => 'puppet:///modules/os/lenses/test_apt_update_manager.aug',
   }
 
-  augeas {
-    'default release-upgrade prompt configuration removed':
-      load_path => '/usr/share/augeas/lenses/contrib/',
-      context   => '/files/etc/update-manager/release-upgrades',
-      changes   => [
-        # Remove other versions of the key
-        'rm DEFAULT/*[label() =~ regexp("[Pp][Rr][Oo][Mm][Pp][Tt]")]',
-        'set DEFAULT/Prompt normal',
-      ],
+  augeas {'default release-upgrade prompt configuration removed':
+    incl    => '/etc/update-manager/release-upgrades',
+    lens    => 'Apt_Update_Manager.lns',
+    changes => [
+      # Remove other versions of the key
+      'rm DEFAULT/*[label() =~ regexp("[Pp][Rr][Oo][Mm][Pp][Tt]")]',
+      'set DEFAULT/Prompt normal',
+    ],
   }
 
   file {'/etc/update-manager/':
