@@ -1,4 +1,4 @@
-class os::ubuntu-lucid {
+class os::ubuntu-quantal {
   # fix 7376
   package {['openssl', 'openssh-server', 'openssh-client',
             'openssh-blacklist', 'ssl-cert']:
