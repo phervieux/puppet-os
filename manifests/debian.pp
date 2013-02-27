@@ -47,7 +47,7 @@ class os::debian {
   # Timezone
   file { "/etc/localtime":
     ensure => present,
-    source => "file:///usr/share/zoneinfo/Europe/Zurich",
+    source => "file:///usr/share/zoneinfo/posix/Europe/Zurich",
   }
 
   file { "/etc/timezone":
