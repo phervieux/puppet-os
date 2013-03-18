@@ -23,6 +23,7 @@ class os::ubuntu-lucid {
   augeas::lens {'apt_update_manager':
     lens_source => 'puppet:///modules/os/lenses/apt_update_manager.aug',
     test_source => 'puppet:///modules/os/lenses/test_apt_update_manager.aug',
+    stock_since => '1.0.0',
   }
 
   augeas {'default release-upgrade prompt configuration removed':
