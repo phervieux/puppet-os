@@ -45,14 +45,14 @@ class os::debian {
   }
 
   # Timezone
-  file { "/etc/localtime":
-    ensure => present,
-    source => "file:///usr/share/zoneinfo/posix/Europe/Zurich",
-  }
-
-  file { "/etc/timezone":
+  file { '/etc/timezone':
     ensure  => present,
     content => "Europe/Zurich\n",
+    notify  => Exec ['reconfigure tzdata'],
+  }
+  exec { 'reconfigure tzdata':
+    command     => 'dpkg-reconfigure -f noninteractive tzdata',
+    refreshonly => true,
   }
 
   # Kernel
