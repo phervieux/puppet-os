@@ -4,33 +4,18 @@ class os::debian {
   #
   package {
     "at":             ensure => present; # usefull for reboots...
-    "atop":           ensure => absent;
     "bc":             ensure => present;
     "bash-completion":ensure => present;
     "bzip2":          ensure => present;
     "cadaver":        ensure => present;
     "cron-apt":       ensure => purged; # Keeps a fresh apt database
-    "curl":           ensure => present;
-    "cvs":            ensure => present;
-    "elinks":         ensure => present;
     "emacs21-common": ensure => absent;
-    "emacs23-nox":    ensure => present; # for fredj (this comes from backports on Lenny)
     "gettext":        ensure => present;
     "iproute":        ensure => present;
-    "less":           ensure => present;
     "locate":         ensure => absent;
     "lynx":           ensure => present;
-    "mtr-tiny":       ensure => present;
-    "patch":          ensure => present;
-    "pwgen":          ensure => present;
-    "rdiff-backup":   ensure => present;
-    "rsync":          ensure => present;
-    "screen":         ensure => present;
     "tofrodos":       ensure => present;
-    "unzip":          ensure => present;
-    "vim":            ensure => present;
     "xfsprogs":       ensure => present;
-    "zip":            ensure => present;
   }
   
   # Umask, etc.
@@ -78,11 +63,12 @@ class os::debian {
   }
 
   file {
-    ["/etc/logrotate.d/atop",
-     "/etc/logrotate.d/psaccs_atop",
-     "/etc/logrotate.d/psaccu_atop"]:
+    [
+      '/etc/logrotate.d/atop',
+      '/etc/logrotate.d/psaccs_atop',
+      '/etc/logrotate.d/psaccu_atop'
+    ]:
     ensure  => absent,
-    require => Package["atop"],
   }
 
 }
