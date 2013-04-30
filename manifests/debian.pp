@@ -14,7 +14,6 @@ class os::debian {
     "iproute":        ensure => present;
     "locate":         ensure => absent;
     "lynx":           ensure => present;
-    "tofrodos":       ensure => present;
     "xfsprogs":       ensure => present;
   }
   
