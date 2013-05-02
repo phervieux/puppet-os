@@ -8,7 +8,7 @@ class os::ubuntu-lucid {
 
   # Default packages
   package {['cron', 'nano',
-            'bzip2', 'cadaver', 'tofrodos', 'lynx', 'locales']:
+            'bzip2', 'cadaver', 'lynx', 'locales']:
     ensure => present;
   }
 
