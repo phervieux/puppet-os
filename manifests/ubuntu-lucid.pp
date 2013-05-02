@@ -7,7 +7,7 @@ class os::ubuntu-lucid {
   }
 
   # Default packages
-  package {['cron', 'nano', 'pwgen', 'vim', 'curl', 'mtr-tiny', 'cvs',
+  package {['cron', 'nano',
             'bzip2', 'cadaver', 'tofrodos', 'lynx', 'locales']:
     ensure => present;
   }
