@@ -28,7 +28,7 @@ class os {
 
     ubuntu: {
       case $::lsbdistcodename {
-        lucid,quantal: {
+        lucid,quantal,raring: {
           include "os::ubuntu-${::lsbdistcodename}"
         }
 
