@@ -1,15 +1,15 @@
 class os {
 
-  file { "/tmp":
+  file { '/tmp':
     ensure => directory,
-    mode   => 1777,
+    mode   => '1777',
     owner  => root,
     group  => root
   }
 
-  case $operatingsystem {
+  case $::operatingsystem {
     debian: {
-      case $lsbdistcodename {
+      case $::lsbdistcodename {
         wheezy: {
           include os::debian-wheezy
         }
@@ -21,19 +21,19 @@ class os {
         }
 
         default: {
-          fail "Unsupported Debian version '${lsbdistcodename}' in 'os' module"
+          fail "Unsupported Debian version '${::lsbdistcodename}' in 'os' module"
         }
       }
     }
 
     ubuntu: {
-      case $lsbdistcodename {
-        lucid,quantal: {
+      case $::lsbdistcodename {
+        lucid,quantal,raring: {
           include "os::ubuntu-${::lsbdistcodename}"
         }
 
         default: {
-          fail "Unsupported Ubuntu version ${lsbdistcodename} in 'os' module"
+          fail "Unsupported Ubuntu version ${::lsbdistcodename} in 'os' module"
         }
       }
     }
@@ -42,7 +42,7 @@ class os {
       include os::centos
     }
     default: {
-      fail "Unsupported OS ${operatingsystem} in 'os' module"
+      fail "Unsupported OS ${::operatingsystem} in 'os' module"
     }
   }
 }
