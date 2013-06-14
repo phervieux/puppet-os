@@ -28,17 +28,6 @@ class os::debian {
     ensure => directory
   }
 
-  # Timezone
-  file { '/etc/timezone':
-    ensure  => present,
-    content => "Europe/Zurich\n",
-    notify  => Exec ['reconfigure tzdata'],
-  }
-  exec { 'reconfigure tzdata':
-    command     => 'dpkg-reconfigure -f noninteractive tzdata',
-    refreshonly => true,
-  }
-
   # Kernel
   file { "/etc/modules":
     ensure => present,
