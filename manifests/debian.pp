@@ -50,13 +50,4 @@ class os::debian {
     group  => root,
   }
 
-  file {
-    [
-      '/etc/logrotate.d/atop',
-      '/etc/logrotate.d/psaccs_atop',
-      '/etc/logrotate.d/psaccu_atop'
-    ]:
-    ensure  => absent,
-  }
-
 }
