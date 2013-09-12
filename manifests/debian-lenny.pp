@@ -18,11 +18,10 @@ class os::debian-lenny {
     require => Package["emacs23-nox"]
   }
 
-  apt::preferences { "c2c-mirror":
-    ensure => present,
-    package => "*",
-    pin => "release o=c2c",
-    priority => "1001",
+  apt::pin {'c2c-mirror':
+    ensure     => present,
+    originator => 'c2c',
+    priority   => 1001,
   }
 
   # SSL Configuration
@@ -33,7 +32,6 @@ class os::debian-lenny {
   # fix 7376
   package { ["openssl", "openssh-server", "openssh-client", "openssh-blacklist", "ssl-cert" ]:
     ensure => latest,
-    require => Exec["apt-get_update"]
   }
 
   exec {"sysctl-reload":

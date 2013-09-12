@@ -3,7 +3,6 @@ class os::ubuntu-raring {
   package {['openssl', 'openssh-server', 'openssh-client',
             'openssh-blacklist', 'ssl-cert']:
     ensure  => latest,
-    require => Exec['apt-get_update'],
   }
 
   # Default packages
