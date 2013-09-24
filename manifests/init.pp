@@ -26,18 +26,6 @@ class os {
       }
     }
 
-    ubuntu: {
-      case $::lsbdistcodename {
-        lucid,quantal,raring: {
-          include "os::ubuntu-${::lsbdistcodename}"
-        }
-
-        default: {
-          fail "Unsupported Ubuntu version ${::lsbdistcodename} in 'os' module"
-        }
-      }
-    }
-
     CentOS: {
       include os::centos
     }
