@@ -11,11 +11,11 @@ class os::debian-lenny {
   }
 
   # general config for emacs (without temporary files ~ )
-  file { "/etc/emacs/site-start.d/50c2c.el":
+  file { '/etc/emacs/site-start.d/50c2c.el':
     ensure  => present,
-    mode    => 644,
-    source  => "puppet:///modules/os/etc/emacs/site-start.d/50c2c.el",
-    require => Package["emacs23-nox"]
+    mode    => '0644',
+    source  => 'puppet:///modules/os/etc/emacs/site-start.d/50c2c.el',
+    require => Package['emacs23-nox']
   }
 
   apt::pin {'c2c-mirror':
@@ -25,19 +25,24 @@ class os::debian-lenny {
   }
 
   # fix 7376
-  package { ["openssh-server", "openssh-client", "openssh-blacklist", "ssl-cert" ]:
+  package {[
+    'openssh-server',
+    'openssh-client',
+    'openssh-blacklist',
+    'ssl-cert',
+  ]:
     ensure => latest,
   }
 
-  exec {"sysctl-reload":
-    command     => "sysctl -p",
+  exec {'sysctl-reload':
+    command     => 'sysctl -p',
     refreshonly => true,
   }
 
   # fixes rt#14979
-  cron {"Keeps a fresh apt database":
-    command  => "/usr/bin/apt-get update -q=2",
+  cron {'Keeps a fresh apt database':
     ensure   => present,
+    command  => '/usr/bin/apt-get update -q=2',
     hour     => 4,
     minute   => fqdn_rand(60),
   }
