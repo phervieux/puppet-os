@@ -24,13 +24,8 @@ class os::debian-lenny {
     priority   => 1001,
   }
 
-  # SSL Configuration
-  package {
-    "ca-certificates": ensure => present;
-  }
-
   # fix 7376
-  package { ["openssl", "openssh-server", "openssh-client", "openssh-blacklist", "ssl-cert" ]:
+  package { ["openssh-server", "openssh-client", "openssh-blacklist", "ssl-cert" ]:
     ensure => latest,
   }
 
