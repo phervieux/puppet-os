@@ -26,7 +26,7 @@ class os {
       }
     }
 
-    CentOS: {
+    CentOS,RedHat: {
       include os::centos
     }
     default: {
