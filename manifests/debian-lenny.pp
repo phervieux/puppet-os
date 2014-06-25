@@ -10,13 +10,15 @@ class os::debian-lenny {
     ensure => absent,
   }
 
+  #DEPRECIATED ! 
+  #Package emacs23-nox not in the catalog for debian lenny srv
   # general config for emacs (without temporary files ~ )
-  file { '/etc/emacs/site-start.d/50c2c.el':
-    ensure  => present,
-    mode    => '0644',
-    source  => 'puppet:///modules/os/etc/emacs/site-start.d/50c2c.el',
-    require => Package['emacs23-nox']
-  }
+  #file { '/etc/emacs/site-start.d/50c2c.el':
+  #  ensure  => present,
+  #  mode    => '0644',
+  #  source  => 'puppet:///modules/os/etc/emacs/site-start.d/50c2c.el',
+  #  require => Package['emacs23-nox']
+  #}
 
   apt::pin {'c2c-mirror':
     ensure     => present,
