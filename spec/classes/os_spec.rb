@@ -30,6 +30,10 @@ describe 'os' do
       :operatingsystem => 'RedHat',
     } }
 
+    let (:pre_condition) {
+      "Exec { path => '/foo' }"
+    }
+
     it { should compile.with_all_deps }
 
     it { should contain_class('os::centos') }
