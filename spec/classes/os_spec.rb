@@ -28,6 +28,7 @@ describe 'os' do
     let (:facts) { {
       :osfamily        => 'RedHat',
       :operatingsystem => 'RedHat',
+      :ipaddress => '10.0.0.1'
     } }
 
     let (:pre_condition) {
