@@ -1,6 +1,6 @@
 class os::debian-lenny {
 
-  include os::debian
+  include ::os::debian
 
   # Disable PC Speaker
   kmod::blacklist {'pcspkr': }
@@ -43,9 +43,9 @@ class os::debian-lenny {
 
   # fixes rt#14979
   cron {'Keeps a fresh apt database':
-    ensure   => present,
-    command  => '/usr/bin/apt-get update -q=2',
-    hour     => 4,
-    minute   => fqdn_rand(60),
+    ensure  => present,
+    command => '/usr/bin/apt-get update -q=2',
+    hour    => 4,
+    minute  => fqdn_rand(60),
   }
 }

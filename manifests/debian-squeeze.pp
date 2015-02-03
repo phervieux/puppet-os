@@ -1,3 +1,3 @@
 class os::debian-squeeze {
-  include os::debian
+  include ::os::debian
 }

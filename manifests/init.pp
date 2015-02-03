@@ -8,16 +8,16 @@ class os {
   }
 
   case $::operatingsystem {
-    debian: {
+    'debian': {
       case $::lsbdistcodename {
-        wheezy: {
-          include os::debian-wheezy
+        'wheezy': {
+          include ::os::debian-wheezy
         }
-        squeeze: {
-          include os::debian-squeeze
+        'squeeze': {
+          include ::os::debian-squeeze
         }
-        lenny: {
-          include os::debian-lenny
+        'lenny': {
+          include ::os::debian-lenny
         }
 
         default: {
@@ -26,8 +26,8 @@ class os {
       }
     }
 
-    CentOS,RedHat: {
-      include os::centos
+    'CentOS','RedHat': {
+      include ::os::centos
     }
     default: {
       fail "Unsupported OS ${::operatingsystem} in 'os' module"
