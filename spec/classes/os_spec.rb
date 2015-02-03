@@ -9,7 +9,7 @@ describe 'os' do
 
     it { should compile.with_all_deps }
 
-    it { should contain_class('os::debian-wheezy') }
+    it { should contain_class('os::debian::wheezy') }
   end
 
   context 'when on unknown Debian version' do
