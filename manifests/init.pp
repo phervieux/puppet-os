@@ -11,13 +11,13 @@ class os {
     'debian': {
       case $::lsbdistcodename {
         'wheezy': {
-          include ::os::debian-wheezy
+          include ::os::debian::wheezy
         }
         'squeeze': {
-          include ::os::debian-squeeze
+          include ::os::debian::squeeze
         }
         'lenny': {
-          include ::os::debian-lenny
+          include ::os::debian::lenny
         }
 
         default: {

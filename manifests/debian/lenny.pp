@@ -1,4 +1,4 @@
-class os::debian-lenny {
+class os::debian::lenny {
 
   include ::os::debian
 
