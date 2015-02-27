@@ -20,7 +20,7 @@ describe 'os' do
     } }
 
     it 'should fail' do
-      expect { should compile }.to raise_error(Puppet::Error, /Unsupported Debian version/)
+      expect { should compile }.to raise_error(/Unsupported Debian version/)
     end
   end
 
@@ -47,7 +47,7 @@ describe 'os' do
     } }
 
     it 'should fail' do
-      expect { should compile }.to raise_error(Puppet::Error, /Unsupported OS/)
+      expect { should compile }.to raise_error(/Unsupported OS/)
     end
   end
 end
