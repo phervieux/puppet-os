@@ -19,23 +19,23 @@ class os::debian {
 
   # Umask, etc.
   file { '/etc/profile':
-    ensure => present,
+    ensure => file,
     mode   => '0644',
     source => 'puppet:///modules/os/etc/profile-debian',
   }
 
   file {'/etc/profile.d':
-    ensure => directory
+    ensure => directory,
   }
 
   # Kernel
   file { '/etc/modules':
-    ensure => present,
+    ensure => file,
   }
 
   # $LANG
   file { '/etc/environment':
-    ensure => present,
+    ensure => file,
     mode   => '0644',
     source => 'puppet:///modules/os/etc/environment',
     owner  => root,

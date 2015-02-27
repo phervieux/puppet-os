@@ -4,7 +4,7 @@ class os {
     ensure => directory,
     mode   => '1777',
     owner  => root,
-    group  => root
+    group  => root,
   }
 
   case $::operatingsystem {
