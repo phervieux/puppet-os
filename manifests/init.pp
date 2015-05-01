@@ -10,6 +10,9 @@ class os {
   case $::operatingsystem {
     'debian': {
       case $::lsbdistcodename {
+        'jessie': {
+          include ::os::debian::jessie
+        }
         'wheezy': {
           include ::os::debian::wheezy
         }
